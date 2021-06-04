@@ -8,6 +8,7 @@ import java.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.kishore.rsocket.data.Message;
 
@@ -24,6 +25,7 @@ public class Stream2StreamMapping {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Stream2StreamMapping.class);
 
+	@PreAuthorize("hasRole('USER')")
 	@MessageMapping("stream-stream")
 	public Flux<Message> channelStreams(final Flux<Duration> settings) {
 		logger.info("Inside channel streams with settings {}", settings);

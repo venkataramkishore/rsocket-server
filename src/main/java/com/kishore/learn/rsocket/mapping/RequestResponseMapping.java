@@ -6,6 +6,7 @@ package com.kishore.learn.rsocket.mapping;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 
 import com.kishore.learn.rsocket.RsocketConceptsApplication;
@@ -23,7 +24,7 @@ public class RequestResponseMapping {
 
 	private static final Logger logger = LogManager.getLogger(RsocketConceptsApplication.class);
 	
-	
+	@PreAuthorize("hasRole('USER')")
 	@MessageMapping("request-response")
 	public Mono<Message> pingMessage(Message msg) throws InterruptedException {
 		logger.info("Received request -message : {} ", msg);

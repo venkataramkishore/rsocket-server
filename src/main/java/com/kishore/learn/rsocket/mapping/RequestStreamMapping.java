@@ -8,6 +8,7 @@ import java.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 
 import com.kishore.rsocket.data.Message;
@@ -24,6 +25,7 @@ public class RequestStreamMapping {
 	
 	private static final Logger logger = LoggerFactory.getLogger(RequestStreamMapping.class);
 
+	@PreAuthorize("hasRole('USER')")
 	@MessageMapping("request-stream")
 	public Flux<Message> streamOfMessages(final Message msg) throws InterruptedException {
 		logger.info("Inside stream of messages with received  message {}", msg);
