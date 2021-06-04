@@ -91,8 +91,9 @@ class RsocketConceptsApplicationTests {
 		.thenCancel()
 		.verify();
 	}
+	
 	@AfterAll
-	void tearDownAllConnections() {
+	public static void tearDownAllConnections() {
 		requester.rsocket().dispose();
 	}
 
